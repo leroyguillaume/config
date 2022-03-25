@@ -1,0 +1,11 @@
+[user]
+	name = Guillaume Leroy
+	email = pro.guillaume.leroy@gmail.com
+[pull]
+	rebase = true
+[branch]
+	autosetuprebase = always
+[rebase]
+	autoStash = true
+[core]
+	editor = /usr/bin/vim

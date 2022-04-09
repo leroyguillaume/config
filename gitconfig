@@ -9,3 +9,5 @@
 	autoStash = true
 [core]
 	editor = /usr/bin/vim
+[init]
+	defaultbranch = main

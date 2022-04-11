@@ -1,8 +1,8 @@
 #!/bin/bash
 
 script_dir=$(dirname $(readlink -f ${0}))
-src_files=(gitconfig zshrc vimrc)
-tgt_files=(~/.gitconfig ~/.zshrc ~/.vimrc)
+src_files=(gitconfig zshrc vimrc npmrc)
+tgt_files=(~/.gitconfig ~/.zshrc ~/.vimrc ~/.npmrc)
 
 for i in ${!src_files[@]}; do
     src_file=${src_files[$i]}

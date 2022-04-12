@@ -1,9 +1,9 @@
 # config
 
-Install personnal configurations.
+Install personnal configurations and system tools.
 
 ```bash
-./install.sh
+sudo ./install.sh
 ```
 
 If some files already exist, a confirmation is prompted to confirm override.

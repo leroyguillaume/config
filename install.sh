@@ -8,6 +8,7 @@ if [ ${USER} != "root" ]; then
 fi
 
 home=$(eval echo ~${SUDO_USER})
+shell=$(cat /etc/passwd | grep ${SUDO_USER} | awk -F : '{print $7}')
 script_dir=$(dirname $(readlink -f ${0}))
 src_files=(gitconfig zshrc vimrc)
 tgt_files=(${home}/.gitconfig ${home}/.zshrc ${home}/.vimrc)
@@ -44,6 +45,14 @@ done
 
 apt update
 apt install -y curl vim zsh
+
+if [ ${shell} != "/usr/bin/zsh" ]; then
+    chsh -s /usr/bin/zsh ${SUDO_USER}
+fi
+
+if [[ ! -d ${home}/.oh-my-zsh ]]; then
+    git clone ${home}/.oh-my-zsh
+fi
 
 if [[ -d /etc/openvpn && $(sudo systemctl is-active systemd-resolved) == "active" ]]; then
     mkdir -p /etc/openvpn/sh

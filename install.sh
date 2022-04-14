@@ -44,7 +44,7 @@ for i in ${!src_files[@]}; do
 done
 
 apt update
-apt install -y curl vim zsh
+apt install -y curl direnv vim zsh
 
 if [ ${shell} != "/usr/bin/zsh" ]; then
     chsh -s /usr/bin/zsh ${SUDO_USER}

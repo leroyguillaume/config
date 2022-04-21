@@ -108,3 +108,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 eval "$(direnv hook zsh)"
+
+export PATH=${PATH}:~/bin

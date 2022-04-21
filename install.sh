@@ -59,3 +59,5 @@ if [[ -d /etc/openvpn && $(sudo systemctl is-active systemd-resolved) == "active
     curl https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved > /etc/openvpn/sh/update-systemd-resolved
     chmod +x /etc/openvpn/sh/update-systemd-resolved
 fi
+
+curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | bash

@@ -109,4 +109,8 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(direnv hook zsh)"
 
+if [ -f ~/.aws/env ]; then
+  . ~/.aws/env
+fi
+
 export PATH=${PATH}:~/bin

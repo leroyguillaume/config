@@ -12,6 +12,8 @@ shell=$(cat /etc/passwd | grep ${SUDO_USER} | awk -F : '{print $7}')
 script_dirpath=$(dirname $(readlink -f ${0}))
 files_dirpath=${script_dirpath}/files
 
+tf_docs_version=0.16.0
+
 # config files
 for config_filename in $(ls ${files_dirpath}); do
     src_filepath=${files_dirpath}/${config_filename}
@@ -19,7 +21,7 @@ for config_filename in $(ls ${files_dirpath}); do
     if [[ ! -f ${tgt_filepath} && ! -L ${tgt_filepath} ]]; then
         ln -s ${src_filepath} ${tgt_filepath}
     else
-        if [ -L ${tgt_filepath} ] && readlink -f ${tgt_filepath}; then
+        if [ -L ${tgt_filepath} ] && readlink -f ${tgt_filepath} > /dev/null; then
             actual_tgt=$(readlink -f ${tgt_filepath})
         fi
         if [[ -z ${actual_tgt} || ${actual_tgt} != ${src_filepath} ]]; then
@@ -66,4 +68,10 @@ if [[ -d /etc/openvpn && $(sudo systemctl is-active systemd-resolved) == "active
 fi
 
 # tfswitch
-curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | bash
+curl -fL https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | bash
+
+# terraform-docs
+curl -fLo /tmp/terraform-docs.tar.gz https://github.com/terraform-docs/terraform-docs/releases/download/v${tf_docs_version}/terraform-docs-v${tf_docs_version}-$(uname)-amd64.tar.gz
+tar xf /tmp/terraform-docs.tar.gz -C /tmp
+chmod +x /tmp/terraform-docs
+mv /tmp/terraform-docs /usr/local/bin

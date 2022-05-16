@@ -99,3 +99,9 @@ tar xf /tmp/terraform-docs.tar.gz -C /tmp
 chmod +x /tmp/terraform-docs
 mv /tmp/terraform-docs /usr/local/bin
 echo "✓"
+
+# ledger live
+echo -n "Installing Ledger Live..."
+curl -fLo /usr/local/bin/ledger-live https://download-live.ledger.com/releases/latest/download/linux 2>> ${log_file}
+chmod +x /usr/local/bin/ledger-live
+echo "✓"

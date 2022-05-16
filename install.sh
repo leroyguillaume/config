@@ -21,7 +21,7 @@ shell=$(cat /etc/passwd | grep ${SUDO_USER} | awk -F : '{print $7}')
 script_dirpath=$(dirname $(readlink -f ${0}))
 files_dirpath=${script_dirpath}/files
 
-packages=(curl direnv htop vim xlip zsh)
+packages=(curl direnv htop vim xclip zsh)
 
 tf_docs_version=0.16.0
 
@@ -64,7 +64,7 @@ echo -n "Updating apt cache... "
 run apt update
 echo "✓"
 echo -n "Installing ${packages[@]}... "
-run apt install -y ${packages}
+run apt install -y ${packages[@]}
 echo "✓"
 
 # oh my zsh

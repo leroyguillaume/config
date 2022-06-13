@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ ${USER} != "root" ]; then
+    >&2 echo "This script must be run as root"
+    exit 1
+fi
+
 function run {
     ${@} >> ${log_file} 2>&1
     exit_status=${?}
@@ -19,11 +24,6 @@ files_dirpath=${script_dirpath}/files
 packages=(curl direnv htop vim xclip zsh)
 
 tf_docs_version=0.16.0
-
-if [ ${USER} != "root" ]; then
-    >&2 echo "This script must be run as root"
-    exit 1
-fi
 
 while getopts "f" opt; do
     case ${opt} in
@@ -129,11 +129,20 @@ else
 fi
 
 # rustup
-if command -v rustup > /dev/null 2>&1 && [ -z "${force}" ]; then
+if [ -d "${home}/.rustup" ] > /dev/null 2>&1 && [ -z "${force}" ]; then
     echo "Skipping rustup installation because it is already installed"
 else
     echo -n "Installing rustup... "
     run curl -Lfo /tmp/install-rustup.sh https://sh.rustup.rs
     run bash /tmp/install-rustup.sh -y
+    echo "✓"
+fi
+
+# pre-commit
+if command -v pre-commit > /dev/null 2>&1 && [ -z "${force}" ]; then
+    echo "Skipping pre-commit installation because it is already installed"
+else
+    echo -n "Installing pre-commit... "
+    run pip install pre-commit
     echo "✓"
 fi

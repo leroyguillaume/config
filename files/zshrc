@@ -113,4 +113,11 @@ if [ -f ~/.aws/env ]; then
   . ~/.aws/env
 fi
 
-export PATH=${PATH}:~/bin
+#function _denv {
+#  emulate -L zsh
+#  /home/gleroy/Documents/projects/denv/target/debug/denv
+#}
+
+#chpwd_functions=(${chpwd_functions[@]} "_denv")
+
+export PATH=${PATH}:~/bin:~/.local/bin
